@@ -96,7 +96,7 @@ function App() {
         img.height * ratio
       );
       ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
-      ctx.miterLimit = 5;
+      ctx.miterLimit = 2.5;
       ctx.save();
 
       ctx.translate(position.x, position.y);
