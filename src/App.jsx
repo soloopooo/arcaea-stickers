@@ -47,7 +47,7 @@ function App() {
     y: characters[character].defaultText.y,
   });
   const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
-  const [spaceSize, setSpaceSize] = useState(1);
+  const [spaceSize, setSpaceSize] = useState(characters[character].defaultText.s);
   const [rotate, setRotate] = useState(characters[character].defaultText.r);
   const [curve, setCurve] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -61,6 +61,7 @@ function App() {
     });
     setRotate(characters[character].defaultText.r);
     setFontSize(characters[character].defaultText.s);
+    setSpaceSize(characters[character].defaultText.s);
     setLoaded(false);
   }, [character]);
 
