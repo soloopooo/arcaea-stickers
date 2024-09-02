@@ -17,25 +17,23 @@ function App() {
   const [config, setConfig] = useState(null);
 
   // using this to trigger the useEffect because lazy to think of a better way
-  // const [rand, setRand] = useState(0);
-  // useEffect(() => {
-  //   try {
-  //     const data = async () => {
-  //       const res = await getConfiguration();
-  //       setConfig(res);
-  //     };
-  //     data();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [rand]);
+  const [rand, setRand] = useState(0);
+  useEffect(() => {
+    try {
+      const data = async () => {
+        const res = await getConfiguration();
+        setConfig(res);
+      };
+      data();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [rand]);
 
   const [infoOpen, setInfoOpen] = useState(false);
-
   const handleClickOpen = () => {
     setInfoOpen(true);
   };
-
   const handleClose = () => {
     setInfoOpen(false);
   };
@@ -158,7 +156,7 @@ function App() {
     link.href = canvas.toDataURL();
     link.click();
     await log(characters[character].id, characters[character].name, "download");
-    // setRand(rand + 1);
+    setRand(rand + 1);
   };
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
@@ -186,15 +184,15 @@ function App() {
       }),
     ]);
     await log(characters[character].id, characters[character].name, "copy");
-    // setRand(rand + 1);
+    setRand(rand + 1);
   };
 
   return (
     <div className="App">
       <Info open={infoOpen} handleClose={handleClose} config={config} />
-      {/* <div className="counter">
+      <div className="counter">
         Total Stickers you made: {config?.total || "Not available"}
-      </div> */}
+      </div>
       <div className="container">
         <div className="vertical">
           <div className="canvas">

@@ -101,13 +101,13 @@ export default function Info({ open, handleClose, config }) {
                 <ListItemText primary="GitHub" secondary="Source Code" />
               </ListItem>
             </List>
-            {/* <Typography variant="h6" component="h3">
+            <Typography variant="h6" component="h3">
               Total stickers made using the app:
               <br />
               {config?.global
                 ? config?.global.toLocaleString() + " Sticker"
                 : "not available"}
-            </Typography> */}
+            </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
