@@ -10,27 +10,25 @@ import Picker from "./components/Picker";
 import Info from "./components/Info";
 import getConfiguration from "./utils/config";
 import log from "./utils/log";
-import { bannerViewed, setBannerViewed } from "./utils/banner";
 
 const { ClipboardItem } = window;
 
 function App() {
   const [config, setConfig] = useState(null);
-  const [bannerView, setBannerView] = useState(bannerViewed());
 
   // using this to trigger the useEffect because lazy to think of a better way
-  const [rand, setRand] = useState(0);
-  useEffect(() => {
-    try {
-      const data = async () => {
-        const res = await getConfiguration();
-        setConfig(res);
-      };
-      data();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [rand]);
+  // const [rand, setRand] = useState(0);
+  // useEffect(() => {
+  //   try {
+  //     const data = async () => {
+  //       const res = await getConfiguration();
+  //       setConfig(res);
+  //     };
+  //     data();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [rand]);
 
   const [infoOpen, setInfoOpen] = useState(false);
 
@@ -42,7 +40,7 @@ function App() {
     setInfoOpen(false);
   };
 
-  const [character, setCharacter] = useState(49);
+  const [character, setCharacter] = useState(5);
   const [text, setText] = useState(characters[character].defaultText.text);
   const [position, setPosition] = useState({
     x: characters[character].defaultText.x,
@@ -97,28 +95,44 @@ function App() {
         img.height * ratio
       );
       ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
-      ctx.lineWidth = 9;
       ctx.save();
 
       ctx.translate(position.x, position.y);
       ctx.rotate(rotate / 10);
       ctx.textAlign = "center";
-      ctx.strokeStyle = "white";
-      ctx.fillStyle = characters[character].color;
+      ctx.fillStyle = characters[character].fillColor;
       var lines = text.split("\n");
       if (curve) {
         for (let line of lines) {
-          for (let i = 0; i < line.length; i++) {
-            ctx.rotate(angle / line.length / 2.5);
+          for (let j = 0; j < 3; j++) {
             ctx.save();
-            ctx.translate(0, -1 * fontSize * 3.5);
-            ctx.strokeText(line[i], 0, 0);
-            ctx.fillText(line[i], 0, 0);
+            for (let i = 0; i < line.length; i++) {
+              ctx.rotate(angle / line.length / 2.2);
+              ctx.save();
+              ctx.translate(0, -1 * fontSize * 3.5);
+              if (j === 0) {
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 20;
+                ctx.strokeText(line[i], 0, 0);
+              } else if (j === 1) {
+                ctx.strokeStyle = characters[character].strokeColor;
+                ctx.lineWidth = 5;
+                ctx.strokeText(line[i], 0, 0);
+              } else {
+                ctx.fillText(line[i], 0, 0);
+              }
+              ctx.restore();
+            }
             ctx.restore();
           }
         }
       } else {
         for (var i = 0, k = 0; i < lines.length; i++) {
+          ctx.strokeStyle = "white";
+          ctx.lineWidth = 20;
+          ctx.strokeText(lines[i], 0, k);
+          ctx.strokeStyle = characters[character].strokeColor;
+          ctx.lineWidth = 5;
           ctx.strokeText(lines[i], 0, k);
           ctx.fillText(lines[i], 0, k);
           k += spaceSize;
@@ -131,11 +145,11 @@ function App() {
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_st.ayaka.one.png`;
+    link.download = `${characters[character].name}_arcst.yurisaki.top.png`;
     link.href = canvas.toDataURL();
     link.click();
     await log(characters[character].id, characters[character].name, "download");
-    setRand(rand + 1);
+    // setRand(rand + 1);
   };
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
@@ -163,43 +177,15 @@ function App() {
       }),
     ]);
     await log(characters[character].id, characters[character].name, "copy");
-    setRand(rand + 1);
+    // setRand(rand + 1);
   };
 
   return (
     <div className="App">
       <Info open={infoOpen} handleClose={handleClose} config={config} />
-      {!bannerView && (
-        <div className="bannercontainer">
-          <div className="bannermessage">
-            <p>New Sekai Stickers mobile app is coming soon</p>
-            <a
-              href="https://link.ayaka.one/boM9XJ"
-              className="bannerbutton"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn more <span>&rarr;</span>
-            </a>
-          </div>
-          <div className="bannerdismiss">
-            <button
-              type="button"
-              onClick={() => {
-                setBannerViewed();
-                setBannerView(true);
-              }}
-            >
-              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-      <div className="counter">
+      {/* <div className="counter">
         Total Stickers you made: {config?.total || "Not available"}
-      </div>
+      </div> */}
       <div className="container">
         <div className="vertical">
           <div className="canvas">
@@ -307,7 +293,7 @@ function App() {
         </div>
         <div className="footer">
           <Button color="secondary" onClick={handleClickOpen}>
-            Info
+            About
           </Button>
         </div>
       </div>

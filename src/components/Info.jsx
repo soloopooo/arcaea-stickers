@@ -20,7 +20,7 @@ export default function Info({ open, handleClose, config }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Info</DialogTitle>
+        <DialogTitle id="alert-dialog-title">About</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Typography variant="h6" component="h3">
@@ -30,71 +30,54 @@ export default function Info({ open, handleClose, config }) {
               <ListItem
                 button
                 onClick={() =>
-                  (window.location.href = "https://github.com/theoriginalayaka")
+                  (window.location.href = "https://github.com/Rosemoe")
                 }
               >
                 <ListItemAvatar>
                   <Avatar
-                    alt="Ayaka"
-                    src="https://avatars.githubusercontent.com/theoriginalayaka"
+                    alt="Rosemoe"
+                    src="https://avatars.githubusercontent.com/Rosemoe"
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary="Ayaka"
-                  secondary="for the original idea"
-                />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() =>
-                  (window.location.href = "https://github.com/modder4869")
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="Modder4869"
-                    src="https://avatars.githubusercontent.com/modder4869"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Modder4869"
-                  secondary="for the help with the code"
+                  primary="Rosemoe"
+                  secondary="for the Arcaea variant of sticker maker"
                 />
               </ListItem>
               <ListItem
                 button
                 onClick={() =>
                   (window.location.href =
-                    "https://www.reddit.com/r/ProjectSekai/comments/x1h4v1/after_an_ungodly_amount_of_time_i_finally_made/")
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="u/SherenPlaysGames"
-                    src="https://styles.redditmedia.com/t5_mygft/styles/profileIcon_n1kman41j5891.jpg"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="u/SherenPlaysGames"
-                  secondary="for the original stamps"
-                />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() =>
-                  (window.location.href =
-                    "https://github.com/TheOriginalAyaka/sekai-stickers/graphs/contributors")
+                    "https://x.com/Xestarrrr")
                 }
               >
                 <ListItemAvatar>
                   <Avatar
                     alt="Contributors"
-                    src="https://avatars.githubusercontent.com/u/583231"
+                    src="https://pbs.twimg.com/profile_images/1829853648521723905/rnRP3FCZ_400x400.jpg"
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary="Contributors"
-                  secondary="for the help with the code"
+                  primary="Xestarrrr"
+                  secondary="for the Arcaea sticker images"
+                />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() =>
+                  (window.location.href =
+                    "https://github.com/TheOriginalAyaka")
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar
+                    alt="Ayaka"
+                    src="https://avatars.githubusercontent.com/TheOriginalAyaka"
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary="Ayaka"
+                  secondary="for the original sticker maker"
                 />
               </ListItem>
             </List>
@@ -106,7 +89,7 @@ export default function Info({ open, handleClose, config }) {
                 button
                 onClick={() =>
                   (window.location.href =
-                    "https://github.com/TheOriginalAyaka/sekai-stickers")
+                    "https://github.com/Rosemoe/arcaea-stickers")
                 }
               >
                 <ListItemAvatar>
@@ -118,36 +101,13 @@ export default function Info({ open, handleClose, config }) {
                 <ListItemText primary="GitHub" secondary="Source Code" />
               </ListItem>
             </List>
-            <Typography variant="h6" component="h3">
-              The discord bot:
-            </Typography>
-            <List>
-              <ListItem
-                button
-                onClick={() =>
-                  (window.location.href =
-                    "http://link.ayaka.one/stbot")
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="Discord"
-                    src="https://cdn.discordapp.com/embed/avatars/0.png"
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Sekai Stickers"
-                  secondary="Add more fun to your server."
-                />
-              </ListItem>
-            </List>
-            <Typography variant="h6" component="h3">
+            {/* <Typography variant="h6" component="h3">
               Total stickers made using the app:
               <br />
               {config?.global
                 ? config?.global.toLocaleString() + " Sticker"
                 : "not available"}
-            </Typography>
+            </Typography> */}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
