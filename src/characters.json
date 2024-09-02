@@ -298,5 +298,20 @@
             "r": -2,
             "s": 42
         }
+    },
+    {
+        "id": "21",
+        "name": "Aichan",
+        "character": "aichan",
+        "img": "aichan.png",
+        "fillColor": "#CDB4E8",
+        "strokeColor": "#a28fb6",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 42
+        }
     }
 ]
