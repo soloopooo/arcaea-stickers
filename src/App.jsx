@@ -96,6 +96,7 @@ function App() {
         img.height * ratio
       );
       ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
+      ctx.miterLimit = 5;
       ctx.save();
 
       ctx.translate(position.x, position.y);
@@ -128,16 +129,23 @@ function App() {
           }
         }
       } else {
-        for (var i = 0, k = 0; i < lines.length; i++) {
-          ctx.strokeStyle = "white";
-          ctx.lineWidth = 20;
-          ctx.strokeText(lines[i], 0, k);
-          ctx.strokeStyle = characters[character].strokeColor;
-          ctx.lineWidth = 5;
-          ctx.strokeText(lines[i], 0, k);
-          ctx.fillText(lines[i], 0, k);
-          k += spaceSize;
+        for (let j = 0; j < 3; j++) {
+          for (var i = 0, k = 0; i < lines.length; i++) {
+            if (j === 0) {
+              ctx.strokeStyle = "white";
+              ctx.lineWidth = 20;
+              ctx.strokeText(lines[i], 0, k);
+            } else if (j === 1) {
+              ctx.strokeStyle = characters[character].strokeColor;
+              ctx.lineWidth = 5;
+              ctx.strokeText(lines[i], 0, k);
+            } else {
+              ctx.fillText(lines[i], 0, k);
+            }
+            k += spaceSize;
+          }
         }
+
         ctx.restore();
       }
     }
