@@ -6,6 +6,7 @@ import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
+import Snackbar from '@mui/material/Snackbar';
 import Picker from "./components/Picker";
 import Info from "./components/Info";
 import getConfiguration from "./utils/config";
@@ -36,6 +37,11 @@ function App() {
   };
   const handleClose = () => {
     setInfoOpen(false);
+  };
+
+  const [openCopySnackbar, setOpenCopySnackbar] = useState(false);
+  const handleSnackClose = (e, r) => {
+    setOpenCopySnackbar(false);
   };
 
   const [character, setCharacter] = useState(5);
@@ -183,6 +189,7 @@ function App() {
         "image/png": b64toBlob(canvas.toDataURL().split(",")[1]),
       }),
     ]);
+    setOpenCopySnackbar(true);
     await log(characters[character].id, characters[character].name, "copy");
     setRand(rand + 1);
   };
@@ -304,6 +311,14 @@ function App() {
           </Button>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={openCopySnackbar}
+        onClose={handleSnackClose}
+        message="Copied image to clipboard."
+        key="copy"
+        autoHideDuration={1500}
+      />
     </div>
   );
 }
