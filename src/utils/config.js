@@ -11,7 +11,6 @@ async function getConfiguration() {
   if (responce.data.key) {
     localStorage.setItem("x-key", responce.data.key);
   }
-  console.log(responce.data);
   return responce.data;
 }
 

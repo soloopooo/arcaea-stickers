@@ -20,7 +20,6 @@ async function log(id, name, type) {
     if (responce.data.key) {
       localStorage.setItem("x-key", responce.data.key);
     }
-    console.log(responce.data);
     return responce.data;
   } catch (error) {
     console.log(error);
