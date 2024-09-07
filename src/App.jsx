@@ -177,7 +177,10 @@ function App() {
     const link = document.createElement("a");
     link.download = `${characters[character].name}_arcst.yurisaki.top.png`;
     link.href = canvas.toDataURL();
+    link.style.display = "none";
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
     await log(characters[character].id, characters[character].name, "download");
     setRand(rand + 1);
   };
