@@ -1,3 +1,4 @@
+import SSFangTangTi from "./fonts/ShangShouFangTangTi.woff2";
 import "./App.css";
 import Canvas from "./components/Canvas";
 import { useState, useEffect } from "react";
@@ -11,6 +12,7 @@ import Picker from "./components/Picker";
 import Info from "./components/Info";
 import getConfiguration from "./utils/config";
 import log from "./utils/log";
+import { preloadFont } from "./utils/preload";
 
 const { ClipboardItem } = window;
 
@@ -30,6 +32,21 @@ function App() {
       console.log(error);
     }
   }, [rand]);
+
+  useEffect(() => {
+    /** @type {AbortController | undefined} */
+    let controller;
+    try {
+      controller = new AbortController();
+      preloadFont("SSFangTangTi", SSFangTangTi, controller.signal);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      return () => {
+        controller?.abort();
+      }
+    }
+  }, []);
 
   const [infoOpen, setInfoOpen] = useState(false);
   const handleClickOpen = () => {
