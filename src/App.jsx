@@ -68,7 +68,7 @@ function App() {
     y: characters[character].defaultText.y,
   });
   const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
-  const [spaceSize, setSpaceSize] = useState(characters[character].defaultText.s);
+  const [spaceSize, setSpaceSize] = useState(50);
   const [rotate, setRotate] = useState(characters[character].defaultText.r);
   const [curve, setCurve] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -82,7 +82,6 @@ function App() {
     });
     setRotate(characters[character].defaultText.r);
     setFontSize(characters[character].defaultText.s);
-    setSpaceSize(characters[character].defaultText.s);
     setLoaded(false);
   }, [character]);
 
@@ -94,7 +93,7 @@ function App() {
 
   let angle = (Math.PI * text.length) / 7;
 
-  const draw = (ctx: CanvasRenderingContext2D) => {
+  const draw = (ctx) => {
     ctx.canvas.width = 296;
     ctx.canvas.height = 256;
 
@@ -126,50 +125,47 @@ function App() {
       ctx.textAlign = "center";
       ctx.fillStyle = characters[character].fillColor;
       var lines = text.split("\n");
-      console.log(angle);
       if (curve) {
         ctx.save();
         for (let line of lines) {
           let lineAngle = (Math.PI * line.length) / 7;
-          for (let j = 0; j < 3; j++) {
+          for (let pass = 0; pass < 2; pass++) {
             ctx.save();
             for (let i = 0; i < line.length; i++) {
               ctx.rotate(lineAngle / line.length / 2.2);
               ctx.save();
               ctx.translate(0, -1 * fontSize * 3.5);
-              if (j === 0) {
+              if (pass === 0) {
                 ctx.strokeStyle = "white";
                 ctx.lineWidth = 15;
                 ctx.strokeText(line[i], 0, 0);
-              } else if (j === 1) {
+              } else {
                 ctx.strokeStyle = characters[character].strokeColor;
                 ctx.lineWidth = 5;
                 ctx.strokeText(line[i], 0, 0);
-              } else {
                 ctx.fillText(line[i], 0, 0);
               }
               ctx.restore();
             }
             ctx.restore();
           }
-          ctx.translate(0, fontSize + 12);
+          ctx.translate(0, ((spaceSize - 50) / 50 + 1) * fontSize);
         }
         ctx.restore();
       } else {
-        for (let j = 0; j < 3; j++) {
+        for (let pass = 0; pass < 2; pass++) {
           for (var i = 0, k = 0; i < lines.length; i++) {
-            if (j === 0) {
+            if (pass === 0) {
               ctx.strokeStyle = "white";
               ctx.lineWidth = 15;
               ctx.strokeText(lines[i], 0, k);
-            } else if (j === 1) {
+            } else {
               ctx.strokeStyle = characters[character].strokeColor;
               ctx.lineWidth = 5;
               ctx.strokeText(lines[i], 0, k);
-            } else {
               ctx.fillText(lines[i], 0, k);
             }
-            k += spaceSize;
+            k += ((spaceSize - 50) / 50 + 1) * fontSize;
           }
         }
 
@@ -292,7 +288,7 @@ function App() {
               <Slider
                 value={spaceSize}
                 onChange={(e, v) => setSpaceSize(v)}
-                min={18}
+                min={0}
                 max={100}
                 step={1}
                 track={false}
