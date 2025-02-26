@@ -91,7 +91,7 @@ function App() {
     setLoaded(true);
   };
 
-  let angle = (Math.PI * text.length) / 7;
+  let angle = (Math.PI * text.length) / 7; // eslint-disable-line no-unused-vars
 
   const draw = (ctx) => {
     ctx.canvas.width = 296;
